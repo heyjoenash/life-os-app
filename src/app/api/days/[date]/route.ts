@@ -6,10 +6,13 @@ import { MOCK_USER_ID } from '@/lib/utils/constants';
  * GET /api/days/[date]
  * Get a day record for a specific date
  */
-export async function GET(request: NextRequest, { params }: { params: { date: string } }) {
+export async function GET(
+  request: NextRequest,
+  context: { params: { date: string } }
+) {
   try {
     // Properly await params in Next.js 15
-    const { date } = await Promise.resolve(params);
+    const { date } = await Promise.resolve(context.params);
     console.log('Days API: Getting day for date:', date);
 
     try {
@@ -65,10 +68,13 @@ export async function GET(request: NextRequest, { params }: { params: { date: st
  * POST /api/days/[date]
  * Create or update a day record
  */
-export async function POST(request: NextRequest, { params }: { params: { date: string } }) {
+export async function POST(
+  request: NextRequest,
+  context: { params: { date: string } }
+) {
   try {
     // Properly await params in Next.js 15
-    const { date } = await Promise.resolve(params);
+    const { date } = await Promise.resolve(context.params);
     console.log('Days API: Creating/updating day for date:', date);
 
     let body: { daily_note?: string; summary?: string } = {};
@@ -241,7 +247,7 @@ export async function POST(request: NextRequest, { params }: { params: { date: s
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { date: string } },
+  context: { params: { date: string } }
 ): Promise<NextResponse> {
   try {
     // Get authentication session
@@ -258,7 +264,7 @@ export async function DELETE(
     const { error } = await supabase
       .from('days')
       .delete()
-      .eq('date', params.date)
+      .eq('date', context.params.date)
       .eq('user_id', session.user.id);
 
     if (error) {

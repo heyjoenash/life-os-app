@@ -1,5 +1,5 @@
 import { getAdminClient } from './admin';
-import { MOCK_USER_ID } from '@/app/api/days/[date]/route';
+import { MOCK_USER_ID } from '@/lib/utils/constants';
 
 /**
  * Initialize the database schema with tables required for the application

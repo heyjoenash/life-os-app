@@ -28,8 +28,8 @@ async function generateAndSaveSummary(dayId: string, dayData: DayData) {
 
   // Generate a simple mock summary
   const todoSummary = todos?.length
-    ? `${todos.length} tasks: ${todos.filter((t) => t.is_completed).length} completed, ${
-        todos.filter((t) => !t.is_completed).length
+    ? `${todos.length} tasks: ${todos.filter((t: any) => t.is_completed).length} completed, ${
+        todos.filter((t: any) => !t.is_completed).length
       } pending`
     : 'No tasks';
 
@@ -71,10 +71,13 @@ Summary for ${dayData.date}:
  * POST /api/days/[date]/summary
  * Generate and save a summary for a specific date
  */
-export async function POST(request: NextRequest, { params }: { params: { date: string } }) {
+export async function POST(
+  request: NextRequest,
+  context: { params: { date: string } }
+) {
   try {
     // Properly await params in Next.js 15
-    const { date } = await Promise.resolve(params);
+    const { date } = await Promise.resolve(context.params);
     console.log('Summary API: Generating summary for date:', date);
 
     // Get the day ID first

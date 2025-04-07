@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { MOCK_USER_ID } from '../days/[date]/route';
+import fs from 'fs';
+import path from 'path';
+import { MOCK_USER_ID } from '@/lib/utils/constants';
 
 // Create a database table setup script
 const createTablesScript = `
