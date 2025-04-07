@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { MOCK_USER_ID } from '../../[date]/route';
+import { MOCK_USER_ID } from '@/lib/utils/constants';
 
 // Define the day data interface
 interface DayData {
